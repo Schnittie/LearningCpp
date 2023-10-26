@@ -4,6 +4,14 @@
 #include <vector>
 
 std::string TICKET;
+std::string LOTTERY;
+std::string LADY;
+std::string UPPER_TICKET;
+std::string LOWER_TICKET;
+std::string UPPER_RESULT;
+std::string MIDDLE_RESULT;
+std::string LOWER_RESULT;
+
 
 void printLotteryText();
 
@@ -19,9 +27,15 @@ void getWinningLine(std::string *basicString, int i, int *pInt);
 
 bool numbersArentUniqe(int *ints);
 
+void resetTicket();
+
+void initASCIIArt();
+
 int main() {
+    initASCIIArt();
     bool cont = true;
     while (cont) {
+        resetTicket();
         printLotteryText();
         int sevenNumbers[7];
         while (!getSevenNumbersFromUser(sevenNumbers)) {
@@ -33,9 +47,9 @@ int main() {
         replaceTicketWithX(sevenNumbers);
         std::cout << "You have filled out your Ticket!\n"
                      "May the odds be ever in your favour\n" << std::endl;
-        std::cout << "_______________________________________________________________________________" << std::endl;
+        std::cout << UPPER_TICKET << std::endl;
         std::cout << TICKET << std::endl;
-        std::cout << "-------------------------------------------------------------------------------" << std::endl;
+        std::cout << LOWER_TICKET << std::endl;
         std::cout << "\n\n" << std::endl;
         std::cout << "The numbers will be drawn now..." << std::endl;
         std::cout << std::endl;
@@ -70,7 +84,7 @@ int main() {
         std::cout
                 << "\nTry again?(y|N)" << std::endl;
         std::cin >> tryAgain;
-        cont = (tryAgain=='y');
+        cont = (tryAgain == 'y');
     }
     return 0;
 }
@@ -79,48 +93,22 @@ void lotteryDraw(int *drawnNumbers) {
     std::string ignored;
     std::string winningLine;
     sevenRandomNumbers(drawnNumbers);
-    std::cout << "\n"
-                 "                             ,---')\n"
-                 "                            (  -_-(\n"
-                 "                            ) .__/ )\n"
-                 "                          _/ _/_( /        _.---._\n"
-                 "                         (__/ _ _) ,-._   /  o    \\\n"
-                 "                           //)__(\\/,-` |_| O  o o O|\n"
-                 "                       _\\\\///==o=\\'      |O o  o O |\n"
-                 "                        `-' \\    /        \\O o   o/\n"
-                 "                             )___\\         `'-.-\\\\\n"
-                 "                            / ,\\ \\       ____)_(____\n"
-                 "                           / /  \\ \\     '--..---,,--'\n"
-                 "                          /()    >()        \\\\_//   \n"
-                 "                          |\\_\\   |\\_\\       /,-.\\" << std::endl;
-    std::cout << "______ ______ ______ ______ ______ ______ ______" << std::endl;
-    std::cout << "|    | |    | |    | |    | |    | |    | |    |" << std::endl;
-    std::cout << "|    | |    | |    | |    | |    | |    | |    |" << std::endl;
-    std::cout << "|    | |    | |    | |    | |    | |    | |    |" << std::endl;
-    std::cout << "------ ------ ------ ------ ------ ------ ------" << std::endl;
+    std::cout << LADY << std::endl;
+    std::cout << UPPER_RESULT << std::endl;
+    std::cout << MIDDLE_RESULT << std::endl;
+    std::cout << MIDDLE_RESULT << std::endl;
+    std::cout << MIDDLE_RESULT << std::endl;
+    std::cout << LOWER_RESULT << std::endl;
     for (int i = 0; i < sizeof drawnNumbers - 1; ++i) {
         getWinningLine(&winningLine, i + 1, drawnNumbers);
         std::cout << "are you ready to see the next number?" << std::endl;
         std::cin >> ignored;
-        std::cout << "\n"
-                     "                             ,---')\n"
-                     "                            (  -_-(\n"
-                     "                            ) .__/ )\n"
-                     "                          _/ _/_( /        _.---._\n"
-                     "                         (__/ _ _) ,-._   /  o    \\\n"
-                     "                           //)__(\\/,-` |_| O  o o O|\n"
-                     "                       _\\\\///==o=\\'      |O o  o O |\n"
-                     "                        `-' \\    /        \\O o   o/\n"
-                     "                             )___\\         `'-.-\\\\\n"
-                     "                            / ,\\ \\       ____)_(____\n"
-                     "                           / /  \\ \\     '--..---,,--'\n"
-                     "                          /()    >()        \\\\_//   \n"
-                     "                          |\\_\\   |\\_\\       /,-.\\" << std::endl;
-        std::cout << "______ ______ ______ ______ ______ ______ ______" << std::endl;
-        std::cout << "|    | |    | |    | |    | |    | |    | |    |" << std::endl;
+        std::cout << LADY << std::endl;
+        std::cout << UPPER_RESULT << std::endl;
+        std::cout << MIDDLE_RESULT << std::endl;
         std::cout << winningLine << std::endl;
-        std::cout << "|    | |    | |    | |    | |    | |    | |    |" << std::endl;
-        std::cout << "------ ------ ------ ------ ------ ------ ------" << std::endl;
+        std::cout << MIDDLE_RESULT << std::endl;
+        std::cout << LOWER_RESULT << std::endl;
     }
 
 
@@ -238,18 +226,7 @@ bool numbersArentUniqe(int *ints) {
 
 void printLotteryText() {
     std::cout << "\n \n " << std::endl;
-    std::cout << "$$\\                   $$\\       $$\\                                   \n"
-                 "$$ |                  $$ |      $$ |                                  \n"
-                 "$$ |       $$$$$$\\  $$$$$$\\   $$$$$$\\    $$$$$$\\   $$$$$$\\  $$\\   $$\\ \n"
-                 "$$ |      $$  __$$\\ \\_$$  _|  \\_$$  _|  $$  __$$\\ $$  __$$\\ $$ |  $$ |\n"
-                 "$$ |      $$ /  $$ |  $$ |      $$ |    $$$$$$$$ |$$ |  \\__|$$ |  $$ |\n"
-                 "$$ |      $$ |  $$ |  $$ |$$\\   $$ |$$\\ $$   ____|$$ |      $$ |  $$ |\n"
-                 "$$$$$$$$\\ \\$$$$$$  |  \\$$$$  |  \\$$$$  |\\$$$$$$$\\ $$ |      \\$$$$$$$ |\n"
-                 "\\________| \\______/    \\____/    \\____/  \\_______|\\__|       \\____$$ |\n"
-                 "                                                            $$\\   $$ |\n"
-                 "                                                            \\$$$$$$  |\n"
-                 "                                                             \\______/ \n"
-                 "" << std::endl;
+    std::cout << LOTTERY << std::endl;
     std::cout << "\n \n " << std::endl;
     std::cout << "Welcome to the ultimate test of luck and intuition!\n"
                  "Get ready to embark on a thrilling journey where fortunes can change in the blink of an eye.\n"
@@ -257,13 +234,52 @@ void printLotteryText() {
               << std::endl;
     std::cout << "\n \n " << std::endl;
     std::cout << "here's your ticket" << std::endl;
-    std::cout << "_______________________________________________________________________________" << std::endl;
+    std::cout << UPPER_TICKET << std::endl;
+    std::cout << TICKET << std::endl;
+    std::cout << LOWER_TICKET << std::endl;
+    std::cout << "now... which seven numbers will you choose? " << std::endl;
+}
+
+//ASCII ART:
+void initASCIIArt() {
+    LOTTERY = "$$\\                   $$\\       $$\\                                   \n"
+              "$$ |                  $$ |      $$ |                                  \n"
+              "$$ |       $$$$$$\\  $$$$$$\\   $$$$$$\\    $$$$$$\\   $$$$$$\\  $$\\   $$\\ \n"
+              "$$ |      $$  __$$\\ \\_$$  _|  \\_$$  _|  $$  __$$\\ $$  __$$\\ $$ |  $$ |\n"
+              "$$ |      $$ /  $$ |  $$ |      $$ |    $$$$$$$$ |$$ |  \\__|$$ |  $$ |\n"
+              "$$ |      $$ |  $$ |  $$ |$$\\   $$ |$$\\ $$   ____|$$ |      $$ |  $$ |\n"
+              "$$$$$$$$\\ \\$$$$$$  |  \\$$$$  |  \\$$$$  |\\$$$$$$$\\ $$ |      \\$$$$$$$ |\n"
+              "\\________| \\______/    \\____/    \\____/  \\_______|\\__|       \\____$$ |\n"
+              "                                                            $$\\   $$ |\n"
+              "                                                            \\$$$$$$  |\n"
+              "                                                             \\______/ \n"
+              "";
+    LADY = "\n"
+           "                             ,---')\n"
+           "                            (  -_-(\n"
+           "                            ) .__/ )\n"
+           "                          _/ _/_( /        _.---._\n"
+           "                         (__/ _ _) ,-._   /  o    \\\n"
+           "                           //)__(\\/,-` |_| O  o o O|\n"
+           "                       _\\\\///==o=\\'      |O o  o O |\n"
+           "                        `-' \\    /        \\O o   o/\n"
+           "                             )___\\         `'-.-\\\\\n"
+           "                            / ,\\ \\       ____)_(____\n"
+           "                           / /  \\ \\     '--..---,,--'\n"
+           "                          /()    >()        \\\\_//   \n"
+           "                          |\\_\\   |\\_\\       /,-.\\";
+    UPPER_TICKET = "_______________________________________________________________________________";
+    LOWER_TICKET = "-------------------------------------------------------------------------------";
+    UPPER_RESULT = "______ ______ ______ ______ ______ ______ ______";
+    LOWER_RESULT = "------ ------ ------ ------ ------ ------ ------";
+    MIDDLE_RESULT= "|    | |    | |    | |    | |    | |    | |    |";
+}
+
+void resetTicket() {
     TICKET = "[  1 ] [  2 ] [  3 ] [  4 ] [  5 ] [  6 ] [  7 ] [  8 ] [  9 ] [ 10 ]\n"
              "[ 11 ] [ 12 ] [ 13 ] [ 14 ] [ 15 ] [ 16 ] [ 17 ] [ 18 ] [ 19 ] [ 20 ]\n"
              "[ 21 ] [ 22 ] [ 23 ] [ 24 ] [ 25 ] [ 26 ] [ 27 ] [ 28 ] [ 29 ] [ 30 ]\n"
              "[ 31 ] [ 32 ] [ 33 ] [ 34 ] [ 35 ] [ 36 ] [ 37 ] [ 38 ] [ 39 ] [ 40 ]\n"
              "[ 41 ] [ 42 ] [ 43 ] [ 44 ] [ 45 ] [ 46 ] [ 47 ] [ 48 ] [ 49 ]";
-    std::cout << TICKET << std::endl;
-    std::cout << "-------------------------------------------------------------------------------" << std::endl;
-    std::cout << "now... which seven numbers will you choose? " << std::endl;
 }
+
