@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 
 [[maybe_unused]] typedef struct phoneBookEntry {
@@ -12,6 +14,10 @@
 void search(const std::vector<phoneBookEntry *> &s);
 
 void machweg(std::vector<phoneBookEntry *> s);
+
+std::vector<phoneBookEntry *> getVectorOfPhonebook();
+
+void writePhonebook(std::vector<phoneBookEntry *> vector1);
 
 phoneBookEntry *newEntry() {
     std::string firstName;
@@ -38,7 +44,7 @@ void printPhoneBook(const std::vector<phoneBookEntry *> &s) {
 }
 
 int main() {
-    std::vector<phoneBookEntry *> s;
+    std::vector<phoneBookEntry *> s = getVectorOfPhonebook();
     char des = 'a';
     while (des) {
         std::cout
@@ -52,6 +58,7 @@ int main() {
                 printPhoneBook(s);
                 break;
             case 'e':
+                writePhonebook(s);
                 machweg(s);
                 des = 0;
                 break;
@@ -63,6 +70,25 @@ int main() {
         }
     }
     return 0;
+}
+
+void writePhonebook(std::vector<phoneBookEntry *> s) {
+        std::ofstream outFile("phonebook", std::ios::binary);
+        for (phoneBookEntry *entry: s) {
+            std::string p =
+             "surname: " + entry->surname + " firsname: " + entry->givenName + " number: " + entry->number+ "\n";
+            outFile << p;
+        }
+        outFile.close();
+}
+
+std::vector<phoneBookEntry *> getVectorOfPhonebook(){
+    std::vector<phoneBookEntry *> s;
+    std::ifstream inFile("students.data", std::ios::binary);
+    phoneBookEntry hatBecokesEntry;
+    inFile.read((char*)&hatBecokesEntry, sizeof(phoneBookEntry));
+    s.push_back(&hatBecokesEntry);
+    return s;
 }
 
 void machweg(std::vector<phoneBookEntry *> s) {
