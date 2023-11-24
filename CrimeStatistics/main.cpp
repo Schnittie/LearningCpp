@@ -44,6 +44,7 @@ void multipleAdresses(std::vector<CrimeStatistic *>* vector1) {
             doubleTrouble.append("  ");
         }
         previousAdresses.append(adresse);
+        previousAdresses.append(" ; ; ");
     }
     std::cout << "I wish I could commit a crime here again: " << doubleTrouble << "\n";
 }

@@ -34,13 +34,13 @@ void CrimeStatistic::print() {
 }
 
 CrimeStatistic::~CrimeStatistic() {
-    delete datetime;
-    delete district;
-    delete adress;
-    delete beat;
-    delete grod;
-    delete crimedescr;
-    delete ucr_ncic_code;
-    delete latitute;
-    delete longitute;
+    delete[] datetime;
+    delete[] district;
+    delete[] adress;
+    delete[] beat;
+    delete[] grod;
+    delete[] crimedescr;
+    delete[] ucr_ncic_code;
+    delete[] latitute;
+    delete[] longitute;
 }

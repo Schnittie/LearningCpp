@@ -67,8 +67,8 @@ void combination::evaluate(combination *other) {
             if (this->comb[i] == other->comb[j] && !blackChars[i] && !blackChars[j] && !whiteChars[i] &&
                 !whiteChars[j]) {
                 std::cout << "w" << std::endl;
-                //whiteChars[i] = true;
-                //whiteChars[j] = true;
+                whiteChars[i] = true;
+                whiteChars[j] = true;
             }
 
         }
