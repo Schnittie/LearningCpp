@@ -13,23 +13,23 @@ void fillFieldWithNumbers(int field[16][16]);
 void fillTileWithNumbers(int field[16][16], int i, int j);
 
 
-void fillState(std::unique_ptr<std::map<int, int>> state);
+void fillState(std::map<int, int>* state);
 
-void printField(int field[16][16], std::map<int, int> *state);
+void printField(int field[16][16], std::map<int, int>* state);
 
-void playGame(int field[16][16], std::map<int, int> *state);
+void playGame(int field[16][16], std::map<int, int>* state);
 
-bool lookat(int field[16][16], std::map<int, int> *state, int i, int j);
+bool lookat(int field[16][16], std::map<int, int>* state, int i, int j);
 
-void reveal(int field[16][16], std::map<int, int> *state, int i, int j);
+void reveal(int field[16][16], std::map<int, int>* state, int i, int j);
 
 bool checkCoords(int k, int l);
 
-bool getTwoNumbersFromUser(int *i, int *j);
+bool getTwoNumbersFromUser(int* i, int* j);
 
-void placeFlag(int field[16][16], std::map<int, int> *state, int i, int j);
+void placeFlag(int field[16][16], std::map<int, int>* state, int i, int j);
 
-bool gameWon(int field[16][16], std::map<int, int> *state, int i);
+bool gameWon(int field[16][16], std::map<int, int>* state, int i);
 
 int getBombNr(int field[16][16]);
 
@@ -45,16 +45,16 @@ int main() {
     printField(field);
     fillFieldWithNumbers(field);
     printField(field);
-    std::unique_ptr<std::map<int, int>> state = std::make_unique<std::map<int, int>>();
+    //std::unique_ptr<std::map<int, int>> state = std::make_unique<std::map<int, int>>();
     //std::unique_ptr<std::map<int, int>> state(std::map<int, int>);
-    //std::map<int, int> state;
-    fillState(state);
+    std::map<int, int> state;
+    fillState(&state);
     printField(field, &state);
 
     playGame(field, &state);
 }
 
-void playGame(int field[16][16], std::map<int, int> *state) {
+void playGame(int field[16][16], std::map<int, int>* state) {
     int i = 5;
     bool gaming = true;
     int j = 5;
@@ -78,7 +78,7 @@ void playGame(int field[16][16], std::map<int, int> *state) {
             default:
                 std::cout << "\n please keep your inputs in line with the game";
         }
-        if(gameWon(field, state, totalNrofBomb)){
+        if (gameWon(field, state, totalNrofBomb)) {
             std::cout << "you won the game, congrats" << std::endl;
             gaming = false;
         }
@@ -90,7 +90,7 @@ int getBombNr(int field[16][16]) {
     int bonbNr = 0;
     for (int i = 0; i < 16; ++i) {
         for (int j = 0; j < 16; ++j) {
-            if (field[i][j]==-1){
+            if (field[i][j] == -1) {
                 bonbNr++;
             }
         }
@@ -98,19 +98,19 @@ int getBombNr(int field[16][16]) {
     return bonbNr;
 }
 
-bool gameWon(int field[16][16], std::map<int, int> *state, int bombNr) {
-    if ((*state)[-1]!=bombNr) return false;
+bool gameWon(int field[16][16], std::map<int, int>* state, int bombNr) {
+    if ((*state)[-1] != bombNr) return false;
     for (int i = 0; i < 16; ++i) {
         for (int j = 0; j < 16; ++j) {
-            if (field[i][j]==-1){
-                if ((*state)[i*100+j]!=2) return false;
+            if (field[i][j] == -1) {
+                if ((*state)[i * 100 + j] != 2) return false;
             }
         }
     }
     return true;
 }
 
-void placeFlag(int field[16][16], std::map<int, int> *state, int i, int j) {
+void placeFlag(int field[16][16], std::map<int, int>* state, int i, int j) {
     switch (state->at(i * 100 + j)) {
         case 1:
             std::cout << "you can't place a flag on a number, silly" << std::endl;
@@ -131,7 +131,7 @@ void placeFlag(int field[16][16], std::map<int, int> *state, int i, int j) {
     }
 }
 
-bool getTwoNumbersFromUser(int *i, int *j) {
+bool getTwoNumbersFromUser(int* i, int* j) {
     std::cout << "please input the coordinates now... row then column" << std::endl;
     std::cin.sync();
     std::string input;
@@ -182,7 +182,7 @@ bool getTwoNumbersFromUser(int *i, int *j) {
     return true;
 }
 
-bool lookat(int field[16][16], std::map<int, int> *state, int i, int j) {
+bool lookat(int field[16][16], std::map<int, int>* state, int i, int j) {
     switch (state->at(i * 100 + j)) {
         case 1:
             //TODO what if visible and number
@@ -206,7 +206,7 @@ bool lookat(int field[16][16], std::map<int, int> *state, int i, int j) {
 
 }
 
-void reveal(int field[16][16], std::map<int, int> *state, int i, int j) {
+void reveal(int field[16][16], std::map<int, int>* state, int i, int j) {
     if (state->at(i * 100 + j) != 0)return;
     if (field[i][j] == -1)return;
     (*state)[i * 100 + j] = (field[i][j] > 0 ? 1 : 3);
@@ -221,7 +221,7 @@ void reveal(int field[16][16], std::map<int, int> *state, int i, int j) {
 
 }
 
-void printField(int field[16][16], std::map<int, int> *state) {
+void printField(int field[16][16], std::map<int, int>* state) {
     std::cout << "\n";
     std::cout << "    1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 " << std::endl;
     for (int i = 0; i < 16; ++i) {
@@ -252,13 +252,13 @@ void printField(int field[16][16], std::map<int, int> *state) {
     }
 }
 
-void fillState(std::unique_ptr<std::map<int, int>> state) {
+void fillState(std::map<int, int>* state) {
     for (int i = 0; i < 16; ++i) {
         for (int j = 0; j < 16; ++j) {
             state->insert({(i * 100 + j), 0});
         }
     }
-    state->insert({-1,0});
+    state->insert({-1, 0});
 }
 
 void fillFieldWithNumbers(int field[16][16]) {

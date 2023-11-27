@@ -1,12 +1,12 @@
 #include <iostream>
 #include <random>
 
-void fourRandomChars(char *drawnColours);
+void fourRandomChars(char* drawnColours);
 
 char getColourFromint(int distribution);
 
 class combination {
-    char *comb;
+    char* comb;
 public:
     ~combination();
 
@@ -16,13 +16,13 @@ public:
 
     void print();
 
-    bool compare(combination *);
+    bool compare(combination*);
 
-    void evaluate(combination *);
+    void evaluate(combination*);
 
 };
 
-combination *getCombignationFromUser();
+combination* getCombignationFromUser();
 
 combination::combination() {
     this->comb = new char[4];
@@ -44,7 +44,7 @@ void combination::print() {
     std::cout << std::endl;
 }
 
-bool combination::compare(combination *other) {
+bool combination::compare(combination* other) {
     for (int i = 0; i < 4; ++i) {
         if (this->comb[i] != other->comb[i]) {
             return false;
@@ -53,12 +53,12 @@ bool combination::compare(combination *other) {
     return true;
 }
 
-void combination::evaluate(combination *other) {
+void combination::evaluate(combination* other) {
     bool blackChars[4] = {false, false, false, false};
     bool whiteChars[4] = {false, false, false, false};
     for (int i = 0; i < 4; ++i) {
         if (this->comb[i] == other->comb[i]) {
-            std::cout << "s"<< std::endl;
+            std::cout << "s" << std::endl;
             blackChars[i] = true;
         }
     }
@@ -76,9 +76,9 @@ void combination::evaluate(combination *other) {
 }
 
 int main() {
-    combination *solution = new combination();
+    combination* solution = new combination();
     //solution->print();
-    combination *p = getCombignationFromUser();
+    combination* p = getCombignationFromUser();
     while (!solution->compare(p)) {
         std::cout << "wrong" << std::endl;
         solution->evaluate(p);
@@ -91,9 +91,9 @@ int main() {
 }
 
 
-combination *getCombignationFromUser() {
+combination* getCombignationFromUser() {
     int numberChars = 0;
-    char *in = new char[4];
+    char* in = new char[4];
     while (numberChars < 4) {
         std::string templ = "rgbskm";
         std::cout << "please input your combination now... \n" << std::endl;
@@ -116,7 +116,7 @@ combination *getCombignationFromUser() {
     return new combination(in);
 }
 
-void fourRandomChars(char *drawnColours) {
+void fourRandomChars(char* drawnColours) {
 
     std::random_device rd;
     std::mt19937 gen(rd());

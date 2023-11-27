@@ -17,15 +17,15 @@ void printLotteryText();
 
 bool getSevenNumbersFromUser(int sevenNumbers[7]);
 
-void replaceTicketWithX(int *numbers);
+void replaceTicketWithX(int* numbers);
 
-void lotteryDraw(int *drawnNumbers);
+void lotteryDraw(int* drawnNumbers);
 
-void sevenRandomNumbers(int *pInt);
+void sevenRandomNumbers(int* pInt);
 
-void getWinningLine(std::string *basicString, int i, int *pInt);
+void getWinningLine(std::string* basicString, int i, int* pInt);
 
-bool numbersArentUniqe(int *ints);
+bool numbersArentUniqe(int* ints);
 
 void resetTicket();
 
@@ -89,7 +89,7 @@ int main() {
     return 0;
 }
 
-void lotteryDraw(int *drawnNumbers) {
+void lotteryDraw(int* drawnNumbers) {
     std::string ignored;
     std::string winningLine;
     sevenRandomNumbers(drawnNumbers);
@@ -114,7 +114,7 @@ void lotteryDraw(int *drawnNumbers) {
 
 }
 
-void getWinningLine(std::string *winningLine, int howMany, int *drawn) {
+void getWinningLine(std::string* winningLine, int howMany, int* drawn) {
     *winningLine = "";
     for (int i = 0; i < sizeof drawn - 1; ++i) {
         *winningLine += "| ";
@@ -132,7 +132,7 @@ void getWinningLine(std::string *winningLine, int howMany, int *drawn) {
     }
 }
 
-void sevenRandomNumbers(int *drawnNumbers) {
+void sevenRandomNumbers(int* drawnNumbers) {
     do {
         std::random_device rd;
         std::mt19937 gen(rd());
@@ -143,7 +143,7 @@ void sevenRandomNumbers(int *drawnNumbers) {
     } while (numbersArentUniqe(drawnNumbers));
 }
 
-void replaceTicketWithX(int *numbers) {
+void replaceTicketWithX(int* numbers) {
     for (int i = 0; i < sizeof(numbers); ++i) {
         int numbrOfBracket = 0;
         for (int j = 0; j < TICKET.size(); ++j) {
@@ -212,7 +212,7 @@ bool getSevenNumbersFromUser(int sevenNumbers[7]) {
     return true;
 }
 
-bool numbersArentUniqe(int *ints) {
+bool numbersArentUniqe(int* ints) {
     for (int i = 0; i < sizeof ints; ++i) {
         for (int j = 0; j < sizeof ints; ++j) {
             if (i != j && ints[i] == ints[j]) {
@@ -272,7 +272,7 @@ void initASCIIArt() {
     LOWER_TICKET = "-------------------------------------------------------------------------------";
     UPPER_RESULT = "______ ______ ______ ______ ______ ______ ______";
     LOWER_RESULT = "------ ------ ------ ------ ------ ------ ------";
-    MIDDLE_RESULT= "|    | |    | |    | |    | |    | |    | |    |";
+    MIDDLE_RESULT = "|    | |    | |    | |    | |    | |    | |    |";
 }
 
 void resetTicket() {
