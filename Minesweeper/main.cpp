@@ -13,7 +13,7 @@ void fillFieldWithNumbers(int field[16][16]);
 void fillTileWithNumbers(int field[16][16], int i, int j);
 
 
-void fillState(std::map<int, int> *state, int field[16][16]);
+void fillState(std::unique_ptr<std::map<int, int>> state);
 
 void printField(int field[16][16], std::map<int, int> *state);
 
@@ -34,6 +34,7 @@ bool gameWon(int field[16][16], std::map<int, int> *state, int i);
 int getBombNr(int field[16][16]);
 
 int main() {
+    //std::unique_ptr<int[16][16]> field(int[16][16]);
     int field[16][16];
     for (int i = 0; i < 16; ++i) {
         for (int j = 0; j < 16; ++j) {
@@ -44,8 +45,10 @@ int main() {
     printField(field);
     fillFieldWithNumbers(field);
     printField(field);
-    std::map<int, int> state;
-    fillState(&state, field);
+    std::unique_ptr<std::map<int, int>> state = std::make_unique<std::map<int, int>>();
+    //std::unique_ptr<std::map<int, int>> state(std::map<int, int>);
+    //std::map<int, int> state;
+    fillState(state);
     printField(field, &state);
 
     playGame(field, &state);
@@ -249,7 +252,7 @@ void printField(int field[16][16], std::map<int, int> *state) {
     }
 }
 
-void fillState(std::map<int, int> *state, int field[16][16]) {
+void fillState(std::unique_ptr<std::map<int, int>> state) {
     for (int i = 0; i < 16; ++i) {
         for (int j = 0; j < 16; ++j) {
             state->insert({(i * 100 + j), 0});
