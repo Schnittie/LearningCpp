@@ -1,0 +1,3 @@
+C:/Users/laure/Documents/Dev/LearningCpp/ReadingLargeFiles/cmake-build-debug/CMakeFiles/ReadingLargeFiles.dir
+C:/Users/laure/Documents/Dev/LearningCpp/ReadingLargeFiles/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/laure/Documents/Dev/LearningCpp/ReadingLargeFiles/cmake-build-debug/CMakeFiles/rebuild_cache.dir

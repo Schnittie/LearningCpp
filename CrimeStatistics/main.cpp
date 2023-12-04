@@ -17,15 +17,15 @@ void multipleAdresses(std::vector<CrimeStatistic*>* vector1);
 
 bool isEmptyOrWhitespace(std::string basicString);
 
-int main() {
-    std::vector<CrimeStatistic*> statistics;
-    loadStatistics(&statistics);
-    outWerten(&statistics);
-    for (CrimeStatistic* c: statistics) {
-        delete (c);
-    }
-    return 0;
-}
+//int main() {
+//    std::vector<CrimeStatistic*> statistics;
+//    loadStatistics(&statistics);
+//    outWerten(&statistics);
+//    for (CrimeStatistic* c: statistics) {
+//        delete (c);
+//    }
+//    return 0;
+//}
 
 void outWerten(std::vector<CrimeStatistic*>* vector1) {
     howmany(vector1);

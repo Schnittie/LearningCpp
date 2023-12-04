@@ -29,7 +29,7 @@ bool getTwoNumbersFromUser(int* i, int* j);
 
 void placeFlag(int field[16][16], std::map<int, int>* state, int i, int j);
 
-bool gameWon(int field[16][16], std::map<int, int>* state, int i);
+bool gameWon(int field[16][16], std::map<int, int>* state, int bombNr);
 
 int getBombNr(int field[16][16]);
 
@@ -44,9 +44,7 @@ int main() {
     fillFieldWithMines(field);
     printField(field);
     fillFieldWithNumbers(field);
-    printField(field);
     //std::unique_ptr<std::map<int, int>> state = std::make_unique<std::map<int, int>>();
-    //std::unique_ptr<std::map<int, int>> state(std::map<int, int>);
     std::map<int, int> state;
     fillState(&state);
     printField(field, &state);
@@ -135,7 +133,6 @@ bool getTwoNumbersFromUser(int* i, int* j) {
     std::cout << "please input the coordinates now... row then column" << std::endl;
     std::cin.sync();
     std::string input;
-    //std::cin >> input;
     std::getline(std::cin, input);
     int currentInt = 0;
     int numberOfInts = 0;
@@ -185,7 +182,6 @@ bool getTwoNumbersFromUser(int* i, int* j) {
 bool lookat(int field[16][16], std::map<int, int>* state, int i, int j) {
     switch (state->at(i * 100 + j)) {
         case 1:
-            //TODO what if visible and number
             return true;
         case 2:
             std::cout << "you can't look where you placed a flag" << std::endl;
@@ -312,10 +308,10 @@ void printField(int field[16][16]) {
 }
 
 void fillFieldWithMines(int field[16][16]) {
-    for (int i = 0; i < 3; ++i) {
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<int> distribution(0, 15);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<int> distribution(0, 15);
+    for (int i = 0; i < 99; ++i) {
         field[distribution(gen)][distribution(gen)] = -1;
     }
 }

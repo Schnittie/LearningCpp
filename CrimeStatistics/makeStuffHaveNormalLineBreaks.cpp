@@ -36,8 +36,8 @@ void replaceCarriageReturns(const std::string& inputFilePath, const std::string&
     std::cout << "Carriage returns replaced successfully." << std::endl;
 }
 
-//int main() {
-//    replaceCarriageReturns("C:\\Users\\laure\\Documents\\Dev\\LearningCpp\\CrimeStatistics\\SacramentocrimeJanuary2006.txt", "C:\\Users\\laure\\Documents\\Dev\\LearningCpp\\CrimeStatistics\\ActuallyWorking.txt");
-//
-//    return 0;
-//}
+int main() {
+    replaceCarriageReturns("C:\\Users\\laure\\Documents\\Dev\\LearningCpp\\CrimeStatistics\\DANGER-1500000SalesRecords.txt", "C:\\Users\\laure\\Documents\\Dev\\LearningCpp\\CrimeStatistics\\beeegRecords.txt");
+
+    return 0;
+}
